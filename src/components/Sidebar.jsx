@@ -1,12 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import styled from "styled-components";
+import {StyledSidebar} from "@/styles/styles";
+import { AndroidIcon, IosIcon, NintendoIcon, PcIcon, PlayStationIcon, XboxIcon } from "./icons";
 
-const StyledSidebar = styled.aside`
-  position:sticky;
-  top: 0;
-  height: max-content;
-`
+
 
 const Sidebar = () => {
   return (
@@ -16,9 +13,9 @@ const Sidebar = () => {
           <Link href={"/"}>Home</Link>
         </li>
         <li>
-          <Link href={"/"}>Reviews</Link>
+          <Link href={"/reviews"}>Reviews</Link>
         </li>
-        <li>
+        {/* <li>
           <ul>
             <li>Wishlist</li>
             <li>My Library</li>
@@ -33,25 +30,42 @@ const Sidebar = () => {
             <li>Next week</li>
             <li>Release calendar</li>
           </ul>
-        </li>
-        <li>Top</li>
+        </li> */}
+        {/* <li>Top</li>
         <li>
           <ul>
             <li>Best of the year</li>
             <li>Popular in 2022</li>
             <li>All time top 250</li>
           </ul>
-        </li>
+        </li> */}
         <li>All games</li>
         <li>
-          Platforms
           <ul>
-            <li>PC</li>
-            <li>PlayStation 4</li>
-            <li>Xbox One</li>
-            <li>Nintendo Switch</li>
-            <li>iOS</li>
-            <li>Android</li>
+            <li>Platforms</li>
+            <li>
+              <Link href={"/pc"}>
+                <div className="icon-box">
+                  <PcIcon />
+                </div>
+                PC
+              </Link>
+            </li>
+            <li>
+              <Link href={"/playstation"}><div className="icon-box"><PlayStationIcon/></div>PlayStation 4</Link>
+            </li>
+            <li>
+              <Link href={"/xbox"}><div className="icon-box"><XboxIcon/></div>Xbox One</Link>
+            </li>
+            <li>
+              <Link href={"/nintendo"}><div className="icon-box"><NintendoIcon/></div>Nintendo Switch</Link>
+            </li>
+            <li>
+              <Link href={"/ios"}><div className="icon-box"><IosIcon/></div>iOS</Link>
+            </li>
+            <li>
+              <Link href={"/andriod"}><div className="icon-box"><AndroidIcon/></div>Android</Link>
+            </li>
           </ul>
         </li>
       </ul>

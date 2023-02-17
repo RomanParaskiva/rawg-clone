@@ -8,7 +8,6 @@ const ContentWrapper = styled.div`
   padding: 10px;
   justify-content: center;
   width: 100%;
-  height: inherit;
 `;
 
 const StyledPage = styled.div`

@@ -106,3 +106,58 @@ export const IconWrapper = styled.div`
     height: 100%;
   }
 `;
+
+export const StyledSidebar = styled.aside`
+  height: max-content;
+  width: 200px;
+  font-family: sans-serif;
+
+  & > ul {
+    list-style: none;
+
+    & > li {
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: 400;
+      display: flex;
+      margin-bottom: 16px;
+      font-weight: 700;
+
+      & a {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      & li:hover a {
+        color: gray;
+      }
+
+      & li:hover .icon-box svg path {
+        fill: gray;
+      }
+    }
+  }
+
+  & > ul ul {
+    list-style: none;
+
+    & > li {
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+  }
+
+  & .icon-box {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & svg {
+      height: 100%;
+    }
+  }
+`;
