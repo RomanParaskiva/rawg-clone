@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import {StyledSidebar} from "@/styles/styles";
+import { StyledSidebar } from "@/styles/styles";
 import { AndroidIcon, IosIcon, NintendoIcon, PcIcon, PlayStationIcon, XboxIcon } from "./icons";
+import styled from "styled-components";
 
-
+const TopBtn = styled.div`
+  position: fixed;
+  padding: 10px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(124 124 129 / 30%);
+  display: ${(props) => (props.show ? "flex" : "none")};
+`;
 
 const Sidebar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isBrowser = () => typeof window !== "undefined";
+
+  const handleScroll = () => {
+    return window.scrollY > 1000 ? setIsScrolled(true) : setIsScrolled(false);
+  };
+
+  useEffect(() => {
+    if (!isBrowser()) return;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  function scrollToTop() {
+    if (!isBrowser()) return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   return (
     <StyledSidebar>
       <ul>
@@ -52,23 +83,51 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <Link href={"/playstation"}><div className="icon-box"><PlayStationIcon/></div>PlayStation 4</Link>
+              <Link href={"/playstation"}>
+                <div className="icon-box">
+                  <PlayStationIcon />
+                </div>
+                PlayStation 4
+              </Link>
             </li>
             <li>
-              <Link href={"/xbox"}><div className="icon-box"><XboxIcon/></div>Xbox One</Link>
+              <Link href={"/xbox"}>
+                <div className="icon-box">
+                  <XboxIcon />
+                </div>
+                Xbox One
+              </Link>
             </li>
             <li>
-              <Link href={"/nintendo"}><div className="icon-box"><NintendoIcon/></div>Nintendo Switch</Link>
+              <Link href={"/nintendo"}>
+                <div className="icon-box">
+                  <NintendoIcon />
+                </div>
+                Nintendo Switch
+              </Link>
             </li>
             <li>
-              <Link href={"/ios"}><div className="icon-box"><IosIcon/></div>iOS</Link>
+              <Link href={"/ios"}>
+                <div className="icon-box">
+                  <IosIcon />
+                </div>
+                iOS
+              </Link>
             </li>
             <li>
-              <Link href={"/andriod"}><div className="icon-box"><AndroidIcon/></div>Android</Link>
+              <Link href={"/andriod"}>
+                <div className="icon-box">
+                  <AndroidIcon />
+                </div>
+                Android
+              </Link>
             </li>
           </ul>
         </li>
       </ul>
+      <TopBtn show={isScrolled} className="top__btn" onClick={scrollToTop}>
+        TOP
+      </TopBtn>
     </StyledSidebar>
   );
 };

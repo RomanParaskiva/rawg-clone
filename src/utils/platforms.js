@@ -2,7 +2,8 @@ import { PcIcon, PlayStationIcon, AndroidIcon, IosIcon, NintendoIcon, PlatformsI
 import { IconWrapper } from "@/styles/styles";
 
 export const getPlatformIcons = (arr) => {
-  return arr.map(({ platform }) => {
+  let counter = 0;
+  const res = arr.map(({ platform }) => {
     switch (platform.slug) {
       case "pc":
         return (
@@ -41,11 +42,10 @@ export const getPlatformIcons = (arr) => {
           </IconWrapper>
         );
       default:
-        return (
-          <IconWrapper key={platform.slug}>
-            <PlatformsIcon />
-          </IconWrapper>
-        );
+        counter++;
+        return
     }
-  });
+  })
+  if(counter > 0) res.push( `+ ${counter}`);
+  return res
 };

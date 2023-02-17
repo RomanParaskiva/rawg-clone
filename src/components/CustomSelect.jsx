@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const OptionWrapper = styled.div`
@@ -31,14 +31,15 @@ const OptionWrapper = styled.div`
 const StyledCustomSelect = styled.div`
   position: relative;
   background-color: rgb(124 124 129 / 30%);
-  width: 220px;
+  width: ${props => props.width};
+  height: max-content;
   padding: 10px;
   cursor: pointer;
   user-select: none;
   border-radius: ${(props) => (props.showOptions ? "12px 12px 0 0" : "12px")};
 `;
 
-const CustomSelect = ({ title, options, onChange }) => {
+const CustomSelect = ({ width, title, options, onChange }) => {
   const [compiledTitle, setCompiledTitle] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -48,15 +49,15 @@ const CustomSelect = ({ title, options, onChange }) => {
 
   const handleClick = (op) => {
     setShowOptions(false);
-    setCompiledTitle(`${title} ${op.title}`);
+    setCompiledTitle(op.title);
     onChange(op.value);
   };
 
-  const optionWrapperRef = useRef();
+  
   return (
-    <StyledCustomSelect showOptions={showOptions}>
+    <StyledCustomSelect showOptions={showOptions} width={width}>
       <div onClick={handleShowOptions}>{compiledTitle ? compiledTitle : title}</div>
-      <OptionWrapper showOptions={showOptions} ref={optionWrapperRef} className="options__wrapper">
+      <OptionWrapper showOptions={showOptions} className="options__wrapper">
         {options.map((op, idx) => (
           <div onClick={() => handleClick(op)} className="custom-select__option" key={op.title + idx}>
             {op.title}

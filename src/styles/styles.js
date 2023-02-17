@@ -47,6 +47,7 @@ export const Box = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   padding: 10px 0;
+  align-items: center;
 `;
 
 export const StyledCard = styled.div`
