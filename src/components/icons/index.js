@@ -5,5 +5,7 @@ import PcIcon from "./PcIcon";
 import PlayStationIcon from "./PlayStationIcon";
 import XboxIcon from "./XboxIcon";
 import PlatformsIcon from "./PlatformsIcon";
+import MenuIcon from "./MenuIcon";
 
-export { IosIcon, AndroidIcon, NintendoIcon, PcIcon, PlatformsIcon, PlayStationIcon, XboxIcon };
+
+export { IosIcon, AndroidIcon, NintendoIcon, PcIcon, PlatformsIcon, PlayStationIcon, XboxIcon, MenuIcon };

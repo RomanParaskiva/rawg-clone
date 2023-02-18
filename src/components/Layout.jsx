@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header, Sidebar } from "@/components";
 import styled from "styled-components";
 
@@ -11,21 +11,23 @@ const ContentWrapper = styled.div`
 `;
 
 const StyledPage = styled.div`
-position: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: auto;
   align-items: center;
-  padding:0 20px;
+  padding: 0 20px;
+  background: black;
 `;
 
 const Layout = ({ children }) => {
+  const [showSidebar, setShowSidebar] = useState(false);
   return (
     <StyledPage>
-      <Header />
+      <Header setShowSidebar={setShowSidebar} />
       <ContentWrapper>
-        <Sidebar />
+        <Sidebar showSidebar={showSidebar} />
         {children}
       </ContentWrapper>
     </StyledPage>

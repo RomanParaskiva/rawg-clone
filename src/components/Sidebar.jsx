@@ -17,7 +17,7 @@ const TopBtn = styled.div`
   display: ${(props) => (props.show ? "flex" : "none")};
 `;
 
-const Sidebar = () => {
+const Sidebar = ({showSidebar}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isBrowser = () => typeof window !== "undefined";
 
@@ -38,7 +38,7 @@ const Sidebar = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   return (
-    <StyledSidebar>
+    <StyledSidebar showSidebar={showSidebar}>
       <ul>
         <li>
           <Link href={"/"}>Home</Link>

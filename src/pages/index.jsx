@@ -1,13 +1,12 @@
-import { useState, memo, useEffect } from "react";
+import { memo, useEffect } from "react";
 import client from "@/axios";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 import { Heading_h1, StyledMain, PageSubtitle, Box, IconWrapper } from "@/styles/styles";
-import GameGridComponent from "@/components/GameGridComponent";
-import CustomSelect from "@/components/CustomSelect";
-import { useRouter } from "next/router";
-import useStore from "@/store";
+import {GameGridComponent, CustomSelect} from "@/components";
 import { AndroidIcon, IosIcon, NintendoIcon, PcIcon, PlatformsIcon, PlayStationIcon, XboxIcon } from "@/components/icons";
+import useStore from "@/store";
 
 const inter = Inter({ subsets: ["latin"] });
 
