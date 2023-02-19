@@ -26,7 +26,6 @@ const SearchComponent = () => {
         })
         .then(({ data }) => {
           setResults([...data.results]);
-          console.log(data);
         });
     } else {
       setShowClearBtn(false);
