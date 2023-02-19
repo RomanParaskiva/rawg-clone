@@ -11,7 +11,7 @@ const OptionWrapper = styled.div`
   background-color: rgb(55 55 57);
   height: ${(props) => (props.showOptions ? "max-content" : 0)};
   opacity: ${(props) => (props.showOptions ? "1" : 0)};
-  z-index: 10;
+  z-index: ${(props) => (props.showOptions ? "10" : "-1")};;
   padding: 10px;
   transition: all 0.3s ease;
 

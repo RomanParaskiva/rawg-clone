@@ -1,36 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import Link from "next/link";
 import client from "@/axios";
-import { StyledSearchWrapper, CloseBtn } from "@/styles/styles"
+import { StyledSearchWrapper, CloseBtn, SearchResultsWrapper } from "@/styles/styles";
 import { debounce } from "@/utils/debounce";
 
-
-
 const SearchComponent = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [showClearBtn, setShowClearBtn] = useState(false);
+  const [results, setResults] = useState([]);
 
   const clearInput = () => {
-    setInputValue("");
+    inputRef.current.value = "";
+    setShowClearBtn(false);
+    setResults([])
   };
+  const inputRef = useRef();
 
-  const searchRequest = async () => {
-    const {data} = await client.get(`/games`, {
-        params: {
-            searh: inputValue
-        }
-    })
+  const searchRequest = (val) => {
+    if (val.length > 0) {
+      setShowClearBtn(true);
+      client
+        .get(`/games`, {
+          params: {
+            search: val,
+          },
+        })
+        .then(({ data }) => {
+          setResults([...data.results]);
+          console.log(data);
+        });
+    } else {
+      setShowClearBtn(false);
+    }
+  };
+  const debouncedHandle = debounce(searchRequest, 500);
 
-    console.log(data);
-  }
-
-  useEffect(() => {
-    console.log(inputValue);
-    debounce(searchRequest, 500)
-  }, [inputValue])
   return (
-    <StyledSearchWrapper>
-      <input onChange={({ target }) => setInputValue(target.value)} type="text" placeholder="Search " value={inputValue} />
-      <CloseBtn show={!!(inputValue.length > 0)} onClick={clearInput}></CloseBtn>
-    </StyledSearchWrapper>
+    <>
+      <StyledSearchWrapper>
+        <input
+          ref={inputRef}
+          onChange={(e) => {
+            e.persist();
+            debouncedHandle(e.target.value);
+          }}
+          type="text"
+          placeholder="Search "
+        />
+        <CloseBtn show={showClearBtn} onClick={clearInput}></CloseBtn>
+      </StyledSearchWrapper>
+      <SearchResultsWrapper show={!!(results.length > 0)}>
+        {results.map((item) => (
+          <Link href={`/games/${item.slug}`} onClick={() => setResults([])}>
+            <div key={item.id}>
+              <img width="50" height="50" src={item.background_image} alt={item.name} /> {item.name}
+            </div>
+          </Link>
+        ))}
+      </SearchResultsWrapper>
+    </>
   );
 };
 

@@ -5,6 +5,11 @@ export const Heading_h1 = styled.h1`
   line-height: 74px;
   font-weight: 700;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 50px;
+    line-height: 54px;
+  }
 `;
 
 export const StyledMain = styled.main`
@@ -44,11 +49,11 @@ export const PageSubtitle = styled.span`
 
 export const Box = styled.div`
   display: flex;
-  flex-direction: ${props => props.column ? "column" : "row"};
+  flex-direction: ${(props) => (props.column ? "column" : "row")};
   flex-wrap: wrap;
   gap: 10px;
   padding: 10px 0;
-  align-items: ${props => props.column ? "start" : "center"};
+  align-items: ${(props) => (props.column ? "start" : "center")};
 `;
 
 export const StyledCard = styled.div`
@@ -92,11 +97,17 @@ export const Logo = styled.a`
 `;
 
 export const HeaderWrapper = styled.header`
+  position: relative;
   display: flex;
   padding: 2rem 3rem;
   width: inherit;
   gap: 25px;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    gap: 10px;
+  }
 `;
 
 export const IconWrapper = styled.div`
@@ -168,17 +179,18 @@ export const StyledSidebar = styled.aside`
 
   @media (max-width: 1000px) {
     position: absolute;
-    right: ${props => props.showSidebar ? "0" : "-100%"};
+    right: ${(props) => (props.showSidebar ? "0" : "-100%")};
     background-color: black;
     padding: 15px;
     border: 1px solid darkslategray;
     border-radius: 12px;
     z-index: 50;
-    transition: .5s ease;
+    transition: 0.5s ease;
   }
 `;
 
 export const StyledSearchWrapper = styled.div`
+  position: relative;
   display: flex;
   flex: 1;
   height: 30px;
@@ -226,4 +238,24 @@ export const CloseBtn = styled.span`
   height: 30px;
   background-repeat: no-repeat;
   z-index: 50;
+`;
+
+export const SearchResultsWrapper = styled.div`
+  position: absolute;
+  top: 100%;
+  display: ${props => props.show ? "flex" : "none"};
+  flex-direction: column;
+  background-color: #000;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  padding: 10px 3rem;
+  gap: 20px;
+  transition: all .3s ease;
+
+  &>a>div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
 `;

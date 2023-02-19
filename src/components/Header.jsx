@@ -16,7 +16,7 @@ const Header = ({ setShowSidebar }) => {
   };
   return (
     <HeaderWrapper>
-      <Logo>RAWG-clone</Logo>
+      <Logo>RAWG<span className="mobile-hidden">-clone</span></Logo>
       <SearchComponent/>
       <WithMediaQuery onClick={handleClick}>
         <MenuIcon />

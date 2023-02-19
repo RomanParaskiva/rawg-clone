@@ -15,19 +15,20 @@ const StyledSwiper = styled.div`
   margin: 20px 0;
 
   & img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
+    max-height: 300px;
   }
 `;
 
 const ReleaseDate = styled.div`
-  padding: 5px;
+  letter-spacing: 0.05em;
 `;
 
 const Heading_h2 = styled.h2`
   font-size: 40px;
   font-family: mono;
-  padding: 20px 0;
+  padding: 10px 0;
 `;
 
 const GamePage = ({ game }) => {
@@ -44,8 +45,8 @@ const GamePage = ({ game }) => {
       <StyledMain>
         <Heading_h1>{game.name}</Heading_h1>
         <Box column style={{ marginBottom: "20px" }}>
-          <Box>{getPlatformIcons(game.parent_platforms)}</Box>
-          <ReleaseDate>Release date {game?.released.split("-").reverse().join(".") || "unknown"}</ReleaseDate>
+          <Box>Platforms: {getPlatformIcons(game.parent_platforms)}</Box>
+          <ReleaseDate>Release date {game?.released?.split("-").reverse().join(".") || "unknown"}</ReleaseDate>
         </Box>
         <StyledSwiper>
           <Swiper modules={[Navigation]} spaceBetween={50} slidesPerView={1} navigation>
@@ -56,7 +57,7 @@ const GamePage = ({ game }) => {
           <Box column>
             <Heading_h2>About</Heading_h2>
             <Box style={{ maxWidth: "700px" }}>
-              <p>{game.description_raw}</p>
+              <p style={{fontSize: "20px", letterSpacing: "0.05em"}}>{game.description_raw}</p>
             </Box>
           </Box>
           <Box column>
