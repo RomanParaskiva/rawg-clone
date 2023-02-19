@@ -22,7 +22,7 @@ const GameGridComponent = () => {
   useEffect(() => {
     setData([...games]);
     setHasNext(next);
-  }, [games]);
+  }, [games, next]);
 
   useEffect(() => {
     const handleResize = () => {

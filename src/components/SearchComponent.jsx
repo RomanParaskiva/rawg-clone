@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import client from "@/axios";
 import { StyledSearchWrapper, CloseBtn, SearchResultsWrapper } from "@/styles/styles";
 import { debounce } from "@/utils/debounce";
@@ -49,9 +50,9 @@ const SearchComponent = () => {
       </StyledSearchWrapper>
       <SearchResultsWrapper show={!!(results.length > 0)}>
         {results.map((item) => (
-          <Link href={`/games/${item.slug}`} onClick={() => setResults([])}>
-            <div key={item.id}>
-              <img width="50" height="50" src={item.background_image} alt={item.name} /> {item.name}
+          <Link key={item.id} href={`/games/${item.slug}`} onClick={() => setResults([])}>
+            <div>
+              <Image width="50" height="50" src={item.background_image} alt={item.name} /> {item.name}
             </div>
           </Link>
         ))}

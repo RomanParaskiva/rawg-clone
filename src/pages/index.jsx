@@ -19,7 +19,7 @@ const Home = ({ response }) => {
       setGames(response.results);
       setNextUrl(response.next);
     }
-  }, [response]);
+  }, [response, setGames, setNextUrl]);
 
   const handleFilters = (value) => {
     const query = router.query;
