@@ -117,6 +117,10 @@ export const StyledStoreCard = styled.div`
       height: 0.5px;
       background: hsla(0,0%,100%,.1);
     }
+
+    & a:hover {
+      filter: opacity(0.5)
+    }
   }
 `;
 
