@@ -2,17 +2,17 @@ import { memo, useEffect } from "react";
 import client from "@/axios";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Inter } from "@next/font/google";
+import { useColumns } from "@/hooks/useColumns.hook";
 import { Heading_h1, StyledMain, PageSubtitle, Box, IconWrapper } from "@/styles/styles";
-import {GameGridComponent, CustomSelect} from "@/components";
+import { GridComponent, CustomSelect, GameCard } from "@/components";
 import { AndroidIcon, IosIcon, NintendoIcon, PcIcon, PlatformsIcon, PlayStationIcon, XboxIcon } from "@/components/icons";
 import useStore from "@/store";
 
-const inter = Inter({ subsets: ["latin"] });
-
 const Home = ({ response }) => {
+  const { games, next } = useStore((state) => ({ games: state.games, next: state.nextUrl }));
   const router = useRouter();
   const { setGames, setNextUrl } = useStore((state) => ({ setGames: state.setGames, setNextUrl: state.setNextUrl }));
+  const { columns } = useColumns();
 
   useEffect(() => {
     if (response?.results?.length > 0) {
@@ -30,14 +30,14 @@ const Home = ({ response }) => {
     });
   };
 
-  const handlePlatforms = value => {
+  const handlePlatforms = (value) => {
     const query = router.query;
     query.parent_platforms = value;
     router.push({
       pathname: router.pathname,
       query: query,
     });
-  }
+  };
 
   return (
     <>
@@ -66,19 +66,65 @@ const Home = ({ response }) => {
 
           <CustomSelect
             width={"50px"}
-            title={<IconWrapper><PlatformsIcon/></IconWrapper>}
+            title={
+              <IconWrapper>
+                <PlatformsIcon />
+              </IconWrapper>
+            }
             options={[
-              { title: <IconWrapper><PcIcon/></IconWrapper>, value: "1" },
-              { title: <IconWrapper><PlayStationIcon/></IconWrapper>, value: "2" },
-              { title: <IconWrapper><XboxIcon/></IconWrapper>, value: "3" },
-              { title: <IconWrapper><NintendoIcon/></IconWrapper>, value: "4" },
-              { title: <IconWrapper><IosIcon/></IconWrapper>, value: "5" },
-              { title: <IconWrapper><AndroidIcon/></IconWrapper>, value: "6" },
+              {
+                title: (
+                  <IconWrapper>
+                    <PcIcon />
+                  </IconWrapper>
+                ),
+                value: "1",
+              },
+              {
+                title: (
+                  <IconWrapper>
+                    <PlayStationIcon />
+                  </IconWrapper>
+                ),
+                value: "2",
+              },
+              {
+                title: (
+                  <IconWrapper>
+                    <XboxIcon />
+                  </IconWrapper>
+                ),
+                value: "3",
+              },
+              {
+                title: (
+                  <IconWrapper>
+                    <NintendoIcon />
+                  </IconWrapper>
+                ),
+                value: "4",
+              },
+              {
+                title: (
+                  <IconWrapper>
+                    <IosIcon />
+                  </IconWrapper>
+                ),
+                value: "5",
+              },
+              {
+                title: (
+                  <IconWrapper>
+                    <AndroidIcon />
+                  </IconWrapper>
+                ),
+                value: "6",
+              },
             ]}
             onChange={handlePlatforms}
           />
         </Box>
-        <GameGridComponent />
+        <GridComponent items={games} columns={columns} next={next} Component={GameCard} />
       </StyledMain>
     </>
   );
@@ -104,14 +150,14 @@ export const getServerSideProps = async ({ query }) => {
       response = { ...data };
     } else {
       ordering = query.ordering;
-      parent_platforms = query.parent_platforms
+      parent_platforms = query.parent_platforms;
       const { data } = await client.get("/games", {
         params: {
           page: 1,
           page_size: 20,
           dates: "2010-01-01,2023-12-31",
           ordering,
-          parent_platforms
+          parent_platforms,
         },
       });
       response = { ...data };

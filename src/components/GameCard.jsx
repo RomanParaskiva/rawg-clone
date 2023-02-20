@@ -3,28 +3,29 @@ import { Box, StyledCard, GenreSpan } from "@/styles/styles";
 import { getPlatformIcons } from "@/utils/platforms";
 import Link from "next/link";
 
-const GameCard = ({ game }) => {
+const GameCard = ({ item }) => {
+  console.log(item);
   return (
-    <Link href={`/games/${game.slug}`}>
-      <StyledCard backgroundImage={game.background_image} className="game-card">
+    <Link href={`/games/${item.slug}`}>
+      <StyledCard backgroundImage={item.background_image} className="game-card">
         <div className="card__image"></div>
-        <Box>{getPlatformIcons(game.parent_platforms)}</Box>
+        <Box>{getPlatformIcons(item.parent_platforms)}</Box>
         <Box>
-          <h3>{game.name}</h3>
+          <h3>{item.name}</h3>
         </Box>
 
         <div>
-          <span>Released: {game.released.split("-").reverse().join(".")}</span>
+          <span>Released: {item.released.split("-").reverse().join(".")}</span>
         </div>
         <Box>
-          {game.genres.map((genre) => (
+          {item.genres.map((genre) => (
             <GenreSpan key={genre.id}>{genre.name}</GenreSpan>
           ))}
         </Box>
         <Box>
-          <span>Metacritic : {game.metacritic}</span>{" "}
+          <span>Metacritic : {item.metacritic}</span>{" "}
           <span>
-            Raiting {game.rating} / {game.rating_top}
+            Raiting {item.rating} / {item.rating_top}
           </span>
         </Box>
       </StyledCard>

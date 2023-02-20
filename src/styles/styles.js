@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Heading_h1 = styled.h1`
+  font-family: sans-serif;
   font-size: 72px;
   line-height: 74px;
   font-weight: 700;
@@ -20,7 +21,7 @@ export const StyledMain = styled.main`
   height: 100%;
 `;
 
-export const GameGrid = styled.div`
+export const Grid = styled.div`
   & .infinite-scroll-component {
     display: grid;
     grid-template-columns: repeat(${(props) => props.columns}, minmax(300px, 1fr));
@@ -76,6 +77,45 @@ export const StyledCard = styled.div`
     & h3 {
       font-size: 36px;
       font-family: system-ui;
+    }
+  }
+`;
+
+export const StyledStoreCard = styled.div`
+  position: relative;  
+  width: 100%;
+  height: 230px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: rgb(32, 32, 32); background-image: linear-gradient(rgba(32, 32, 32, 0.5), rgb(32, 32, 32) 70%), url(${(props) => props.backgroundImage});
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: all .4s ease;
+
+    &:hover {
+      height: max-content;
+    }
+  
+    & h2 {
+      font-size: 30px;
+      font-family: system-ui;
+      filter: drop-shadow(2px 4px 6px black);
+    }
+
+    & span {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: monospace;
+      filter: drop-shadow(2px 4px 6px black);
+    }
+
+    & .line {
+      width: 100%;
+      height: 0.5px;
+      background: hsla(0,0%,100%,.1);
     }
   }
 `;
@@ -243,7 +283,7 @@ export const CloseBtn = styled.span`
 export const SearchResultsWrapper = styled.div`
   position: absolute;
   top: 100%;
-  display: ${props => props.show ? "flex" : "none"};
+  display: ${(props) => (props.show ? "flex" : "none")};
   flex-direction: column;
   background-color: #000;
   left: 0;
@@ -251,11 +291,33 @@ export const SearchResultsWrapper = styled.div`
   z-index: 60;
   padding: 10px 3rem;
   gap: 20px;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 
-  &>a>div {
+  & > a > div {
     display: flex;
     align-items: center;
     gap: 15px;
   }
+`;
+
+export const StyledSwiper = styled.div`
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px 0;
+
+  & img {
+    width: auto;
+    height: 100%;
+    max-height: 300px;
+  }
+`;
+
+export const ReleaseDate = styled.div`
+  letter-spacing: 0.05em;
+`;
+
+export const Heading_h2 = styled.h2`
+  font-size: 40px;
+  font-family: sans-serif;
+  padding: 10px 0;
 `;

@@ -1,6 +1,5 @@
-import GameCard from "@/components/GameCard";
 
-export const createGridColumns = (arr, columns) => {
+export const createGridColumns = (arr, columns, Component) => {
     const result = [];
     let counter = 0;
 
@@ -15,8 +14,8 @@ export const createGridColumns = (arr, columns) => {
 
     return result.map((col, idx) => (
         <div key={"col-" + idx} className="games-grid__column">
-          {col.map((game) => (
-            <GameCard key={game.id} game={game} />
+          {col.map((item) => (
+            <Component key={item.id} item={item} />
           ))}
         </div>
       ))

@@ -1,38 +1,16 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 import client from "@/axios";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { StyledMain, Heading_h1, Box, GenreSpan } from "@/styles/styles";
+import { StyledMain, Heading_h1, Box, GenreSpan, StyledSwiper, ReleaseDate, Heading_h2 } from "@/styles/styles";
 import { getPlatformIcons } from "@/utils/platforms";
-import styled from "styled-components";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const StyledSwiper = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  margin: 20px 0;
-
-  & img {
-    width: auto;
-    height: 100%;
-    max-height: 300px;
-  }
-`;
-
-const ReleaseDate = styled.div`
-  letter-spacing: 0.05em;
-`;
-
-const Heading_h2 = styled.h2`
-  font-size: 40px;
-  font-family: mono;
-  padding: 10px 0;
-`;
-
 const GamePage = ({ game }) => {
-  
+  console.log(game);
   return (
     <>
       <Head>
@@ -57,7 +35,7 @@ const GamePage = ({ game }) => {
           <Box column>
             <Heading_h2>About</Heading_h2>
             <Box style={{ maxWidth: "700px" }}>
-              <p style={{fontSize: "20px", letterSpacing: "0.05em"}}>{game.description_raw}</p>
+              <p style={{ fontSize: "20px", letterSpacing: "0.05em" }}>{game.description_raw}</p>
             </Box>
           </Box>
           <Box column>
@@ -68,8 +46,27 @@ const GamePage = ({ game }) => {
               ))}
             </Box>
 
-            <span>Publishers</span>
-            <Box column>{game.publishers.map(item => (<h3 key={item.id}>{item.name}</h3>))}</Box>
+            {game.publishers.length > 0 && (
+              <>
+                <span>Publishers</span>
+                <Box column>
+                  {game.publishers.map((item) => (
+                    <h3 key={item.id}>{item.name}</h3>
+                  ))}
+                </Box>
+              </>
+            )}
+
+            {game?.website && (
+              <>
+                <span>Website</span>
+                <Box>
+                  <Link target={"_blank"} href={game.website}>
+                    {game.website}
+                  </Link>
+                </Box>
+              </>
+            )}
           </Box>
         </Box>
       </StyledMain>
@@ -80,7 +77,6 @@ const GamePage = ({ game }) => {
 export default GamePage;
 
 export const getServerSideProps = async ({ query }) => {
- 
   try {
     if (typeof query === undefined || !query?.slug) throw new Error("Game not found");
 
@@ -88,7 +84,7 @@ export const getServerSideProps = async ({ query }) => {
 
     if (data.screenshots_count > 0) {
       const res = await client.get(`/games/${data.id}/screenshots`);
-     
+
       data.screenshots = [...res.data.results];
     }
 

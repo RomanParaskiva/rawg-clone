@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
     <StyledPage>
       <Header setShowSidebar={setShowSidebar} />
       <ContentWrapper>
-        <Sidebar showSidebar={showSidebar} />
+        <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
         {children}
       </ContentWrapper>
     </StyledPage>

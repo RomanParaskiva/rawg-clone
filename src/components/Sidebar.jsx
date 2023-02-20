@@ -15,15 +15,23 @@ const TopBtn = styled.div`
   align-items: center;
   background-color: rgb(124 124 129 / 30%);
   display: ${(props) => (props.show ? "flex" : "none")};
+  @media (max-width: 768px) {
+    bottom: 10px;
+    right: 10px;
+  }
 `;
 
-const Sidebar = ({showSidebar}) => {
+const Sidebar = ({showSidebar, setShowSidebar}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const isBrowser = () => typeof window !== "undefined";
 
   const handleScroll = () => {
     return window.scrollY > 1000 ? setIsScrolled(true) : setIsScrolled(false);
   };
+
+  const handleClick = () => {
+    if(showSidebar) setShowSidebar(prev => !prev)
+  }
 
   useEffect(() => {
     if (!isBrowser()) return;
@@ -40,11 +48,11 @@ const Sidebar = ({showSidebar}) => {
   return (
     <StyledSidebar showSidebar={showSidebar}>
       <ul>
-        <li>
+        <li onClick={handleClick}>
           <Link href={"/"}>Home</Link>
         </li>
-        <li>
-          <Link href={"/reviews"}>Reviews</Link>
+        <li onClick={handleClick}>
+          <Link href={"/stores"}>Stores</Link>
         </li>
         {/* <li>
           <ul>
