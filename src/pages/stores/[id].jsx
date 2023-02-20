@@ -6,8 +6,7 @@ import { GameCard, GridComponent } from "@/components";
 import { useColumns } from "@/hooks/useColumns.hook";
 
 const StorePage = ({ storeData, data }) => {
-  console.log({ storeData, data });
-  const title = `Games Available at ${storeData.name}`
+  const title = `Games Available at ${storeData.name}`;
   const { columns } = useColumns();
   return (
     <>
@@ -20,9 +19,8 @@ const StorePage = ({ storeData, data }) => {
 
       <StyledMain>
         <Heading_h1>{title}</Heading_h1>
-        <PageSubtitle dangerouslySetInnerHTML={{__html: storeData.description}}></PageSubtitle>
+        <PageSubtitle dangerouslySetInnerHTML={{ __html: storeData.description }}></PageSubtitle>
 
-        
         <GridComponent items={data.results} columns={columns} next={data.next} Component={GameCard} />
       </StyledMain>
     </>
@@ -32,7 +30,6 @@ const StorePage = ({ storeData, data }) => {
 export default StorePage;
 
 export const getServerSideProps = async ({ query }) => {
-  console.log(query);
   let storeData = {};
   try {
     const {
