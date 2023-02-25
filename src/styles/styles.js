@@ -325,3 +325,31 @@ export const Heading_h2 = styled.h2`
   font-family: sans-serif;
   padding: 10px 0;
 `;
+
+export const Separator = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #57c0c582;
+`;
+
+export const StyledAchievements = styled(Box)`
+  flex-wrap: nowrap;
+  align-items: unset;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+  }
+  & .ach__percent {
+    background-color: #57c0c582;
+    padding: 3px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  & .ach__image {
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 8px 2px #57c0c582;
+  }
+`;

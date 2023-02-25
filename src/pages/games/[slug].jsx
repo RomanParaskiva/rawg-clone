@@ -4,13 +4,14 @@ import Link from "next/link";
 import client from "@/axios";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { StyledMain, Heading_h1, Box, GenreSpan, StyledSwiper, ReleaseDate, Heading_h2 } from "@/styles/styles";
+import { StyledMain, Heading_h1, Box, GenreSpan, StyledSwiper, ReleaseDate, Heading_h2, Separator } from "@/styles/styles";
 import { getPlatformIcons } from "@/utils/platforms";
+import { _getAchievementsList } from "@/utils/achievements";
 import "swiper/css";
 import "swiper/css/navigation";
 
 const GamePage = ({ game }) => {
-  console.log(game);
+  const achievements = game?.achievements?.length > 0 ? _getAchievementsList(game.achievements) : [];
   return (
     <>
       <Head>
@@ -32,12 +33,14 @@ const GamePage = ({ game }) => {
           </Swiper>
         </StyledSwiper>
         <Box style={{ gap: "25px" }}>
-          <Box column>
-            <Heading_h2>About</Heading_h2>
-            <Box style={{ maxWidth: "700px" }}>
-              <p style={{ fontSize: "20px", letterSpacing: "0.05em" }}>{game.description_raw}</p>
+          {game?.description_raw?.length > 0 && (
+            <Box column>
+              <Heading_h2>About</Heading_h2>
+              <Box style={{ maxWidth: "700px" }}>
+                <p style={{ fontSize: "20px", letterSpacing: "0.05em" }}>{game.description_raw}</p>
+              </Box>
             </Box>
-          </Box>
+          )}
           <Box column>
             <span>Genre</span>
             <Box>
@@ -48,6 +51,7 @@ const GamePage = ({ game }) => {
 
             {game.publishers.length > 0 && (
               <>
+                <Separator />
                 <span>Publishers</span>
                 <Box column>
                   {game.publishers.map((item) => (
@@ -56,9 +60,9 @@ const GamePage = ({ game }) => {
                 </Box>
               </>
             )}
-
             {game?.website && (
               <>
+                <Separator />
                 <span>Website</span>
                 <Box>
                   <Link target={"_blank"} href={game.website}>
@@ -68,6 +72,10 @@ const GamePage = ({ game }) => {
               </>
             )}
           </Box>
+        </Box>
+        <Box column>
+          {achievements.length > 0 && <Heading_h2>Achievements</Heading_h2>}
+          {achievements}
         </Box>
       </StyledMain>
     </>
@@ -86,6 +94,12 @@ export const getServerSideProps = async ({ query }) => {
       const res = await client.get(`/games/${data.id}/screenshots`);
 
       data.screenshots = [...res.data.results];
+    }
+
+    const ach = await client.get(`/games/${data.id}/achievements`);
+
+    if (ach?.data?.results?.length > 0) {
+      data.achievements = ach.data.results;
     }
 
     return {

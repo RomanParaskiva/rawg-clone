@@ -4,7 +4,6 @@ import { getPlatformIcons } from "@/utils/platforms";
 import Link from "next/link";
 
 const GameCard = ({ item }) => {
-  console.log(item);
   return (
     <Link href={`/games/${item.slug}`}>
       <StyledCard backgroundImage={item.background_image} className="game-card">

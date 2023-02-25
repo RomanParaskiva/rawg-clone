@@ -2,6 +2,7 @@ import { PcIcon, PlayStationIcon, AndroidIcon, IosIcon, NintendoIcon, PlatformsI
 import { IconWrapper } from "@/styles/styles";
 
 export const getPlatformIcons = (arr) => {
+  if( !Array.isArray(arr) || arr.length === 0) return []
   let counter = 0;
   const res = arr.map(({ platform }) => {
     switch (platform.slug) {
