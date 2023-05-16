@@ -22,11 +22,11 @@ const Stores = ({ data, error }) => {
   return (
     <>
       <Head>
-        <title>All games! - Истории</title>
+        <title>All games! - Магазины</title>
       </Head>
 
       <StyledMain>
-        <Heading_h1>Истории</Heading_h1>
+        <Heading_h1>Магазины</Heading_h1>
 
         <GridComponent items={stores} columns={columns} next={data.next} Component={StoreCard} />
       </StyledMain>
