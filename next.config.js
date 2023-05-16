@@ -10,13 +10,6 @@ const withPWA = require("next-pwa")({
   disable: process.env.NODE_ENV === "development",
 });
 
-const ContentSecurityPolicy = `
-   default-src 'self';
-   script-src 'self';
-   connect-src 'self' vitals.vercel-insights.com;
-   style-src 'self';
-   font-src 'self';  
- `;
 
 const securityHeaders = () => [
   {
@@ -30,10 +23,6 @@ const securityHeaders = () => [
   {
     key: 'X-XSS-Protection',
     value: '1; mode=block',
-  },
-  {
-    key: 'Content-Security-Policy',
-    value: ContentSecurityPolicy.replace(/\s{2,}/g, ' ').trim(),
   },
 ];
 
