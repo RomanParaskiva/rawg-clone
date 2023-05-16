@@ -6,15 +6,12 @@ import { GameCard, GridComponent } from "@/components";
 import { useColumns } from "@/hooks/useColumns.hook";
 
 const StorePage = ({ storeData, data }) => {
-  const title = `Games Available at ${storeData.name}`;
+  const title = `All Games - Игра доступна на ${storeData.name}`;
   const { columns } = useColumns();
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={title} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <StyledMain>

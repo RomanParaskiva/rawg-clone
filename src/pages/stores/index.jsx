@@ -22,14 +22,11 @@ const Stores = ({ data, error }) => {
   return (
     <>
       <Head>
-        <title>Stores</title>
-        <meta name="description" content={"Stores"} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>All games! - Истории</title>
       </Head>
 
       <StyledMain>
-        <Heading_h1>Stores</Heading_h1>
+        <Heading_h1>Истории</Heading_h1>
 
         <GridComponent items={stores} columns={columns} next={data.next} Component={StoreCard} />
       </StyledMain>

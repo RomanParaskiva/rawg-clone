@@ -4,7 +4,7 @@ import { Box, StyledAchievements } from "@/styles/styles";
 export const _getAchievementsList = (list) => {
   return list.map((item) => (
     <StyledAchievements key={item.id}>
-      <Image className="ach__image" src={item.image} width="100" height="100" />
+      <Image className="ach__image" src={item.image} width="100" height="100" alt={item?.name || ""} />
       <Box column>
         <Box>
           <h3 className="ach_title">{item.name}</h3>
