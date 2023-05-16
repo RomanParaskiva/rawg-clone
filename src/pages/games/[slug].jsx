@@ -56,7 +56,7 @@ const GamePage = ({ game }) => {
                       width={800}
                       height={600}
                       src={item.image}
-                      alt={item.id}
+                      alt={item?.id || ""}
                     />
                   }
                 </SwiperSlide>
