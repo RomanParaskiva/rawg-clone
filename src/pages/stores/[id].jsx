@@ -6,7 +6,7 @@ import { GameCard, GridComponent } from "@/components";
 import { useColumns } from "@/hooks/useColumns.hook";
 
 const StorePage = ({ storeData, data }) => {
-  const title = `All Games - Игра доступна на ${storeData.name}`;
+  const title = `All Games - Игры доступные на ${storeData.name}`;
   const { columns } = useColumns();
   return (
     <>
