@@ -1,17 +1,30 @@
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import client from "@/axios";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { StyledMain, Heading_h1, Box, GenreSpan, StyledSwiper, ReleaseDate, Heading_h2, Separator } from "@/styles/styles";
+import {
+  StyledMain,
+  Heading_h1,
+  Box,
+  GenreSpan,
+  StyledSwiper,
+  ReleaseDate,
+  Heading_h2,
+  Separator,
+} from "@/styles/styles";
 import { getPlatformIcons } from "@/utils/platforms";
 import { _getAchievementsList } from "@/utils/achievements";
 import "swiper/css";
 import "swiper/css/navigation";
 
 const GamePage = ({ game }) => {
-  const achievements = game?.achievements?.length > 0 ? _getAchievementsList(game.achievements) : [];
+  const achievements =
+    game?.achievements?.length > 0
+      ? _getAchievementsList(game.achievements)
+      : [];
   const title = game?.name || "";
   return (
     <>
@@ -23,11 +36,31 @@ const GamePage = ({ game }) => {
         <Heading_h1>{game.name}</Heading_h1>
         <Box column style={{ marginBottom: "20px" }}>
           <Box>Platforms: {getPlatformIcons(game.parent_platforms)}</Box>
-          <ReleaseDate>Release date {game?.released?.split("-").reverse().join(".") || "unknown"}</ReleaseDate>
+          <ReleaseDate>
+            Release date{" "}
+            {game?.released?.split("-").reverse().join(".") || "unknown"}
+          </ReleaseDate>
         </Box>
         <StyledSwiper>
-          <Swiper modules={[Navigation]} spaceBetween={50} slidesPerView={1} navigation>
-            {game.screenshots.length > 0 && game.screenshots.map((item) => <SwiperSlide key={item.id}>{<img src={item.image} alt={item.id} />}</SwiperSlide>)}
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+          >
+            {game.screenshots.length > 0 &&
+              game.screenshots.map((item) => (
+                <SwiperSlide key={item.id}>
+                  {
+                    <Image
+                      width={800}
+                      height={600}
+                      src={item.image}
+                      alt={item.id}
+                    />
+                  }
+                </SwiperSlide>
+              ))}
           </Swiper>
         </StyledSwiper>
         <Box style={{ gap: "25px" }}>
@@ -35,7 +68,9 @@ const GamePage = ({ game }) => {
             <Box column>
               <Heading_h2>About</Heading_h2>
               <Box style={{ maxWidth: "700px" }}>
-                <p style={{ fontSize: "20px", letterSpacing: "0.05em" }}>{game.description_raw}</p>
+                <p style={{ fontSize: "20px", letterSpacing: "0.05em" }}>
+                  {game.description_raw}
+                </p>
               </Box>
             </Box>
           )}
@@ -84,7 +119,8 @@ export default GamePage;
 
 export const getServerSideProps = async ({ query }) => {
   try {
-    if (typeof query === undefined || !query?.slug) throw new Error("Game not found");
+    if (typeof query === undefined || !query?.slug)
+      throw new Error("Game not found");
 
     const { data } = await client.get(`/games/${query.slug}`);
 
