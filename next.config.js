@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa')
+
 const runtimeCaching = require('next-pwa/cache')
+
+const withPWA = require("next-pwa")({
+  register: true,
+  dest: 'public',
+  runtimeCaching,
+  buildExcludes: [/middleware-manifest.json$/],
+  disable: process.env.NODE_ENV === "development",
+});
 const nextConfig = withPWA({
   reactStrictMode: true,
   compiler: {
@@ -17,11 +25,10 @@ const nextConfig = withPWA({
       },
     ],
   },
-  pwa: {
-      disable: process.env.NODE_ENV !== 'production',
-      dest: 'public',
-      runtimeCaching,
-      buildExcludes: [/middleware-manifest.json$/],
+  webpack5: true,
+    webpack: (config) => {
+        config.resolve.fallback = { fs: false };
+        return config;
     },
 })
 
