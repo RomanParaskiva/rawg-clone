@@ -16,7 +16,7 @@ const Header = ({ setShowSidebar }) => {
   };
   return (
     <HeaderWrapper>
-      <Logo>RAWG<span className="mobile-hidden">-clone</span></Logo>
+      <Logo href="/">AG<span className="mobile-hidden">-All games!</span></Logo>
       <SearchComponent/>
       <WithMediaQuery onClick={handleClick}>
         <MenuIcon />

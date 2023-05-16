@@ -12,13 +12,11 @@ import "swiper/css/navigation";
 
 const GamePage = ({ game }) => {
   const achievements = game?.achievements?.length > 0 ? _getAchievementsList(game.achievements) : [];
+  const title = game?.name || "";
   return (
     <>
       <Head>
-        <title>{game.name}</title>
-        <meta name="description" content={game.description_raw} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>All games - {title}</title>
       </Head>
 
       <StyledMain>

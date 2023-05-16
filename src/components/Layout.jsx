@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Header, Sidebar } from "@/components";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const ContentWrapper = styled.div`
@@ -23,14 +24,18 @@ const StyledPage = styled.div`
 
 const Layout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const router = useRouter();
+
   return (
-    <StyledPage>
-      <Header setShowSidebar={setShowSidebar} />
-      <ContentWrapper>
-        <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-        {children}
-      </ContentWrapper>
-    </StyledPage>
+    <>
+      <StyledPage>
+        <Header setShowSidebar={setShowSidebar} />
+        <ContentWrapper>
+          <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+          {children}
+        </ContentWrapper>
+      </StyledPage>
+    </>
   );
 };
 

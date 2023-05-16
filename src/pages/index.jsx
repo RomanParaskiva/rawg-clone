@@ -42,24 +42,21 @@ const Home = ({ response }) => {
   return (
     <>
       <Head>
-        <title>{response?.seo_title}</title>
-        <meta name="description" content={response?.seo_title} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>All Games - Новые и популярные игры. Обзоры и требования.</title>
       </Head>
 
       <StyledMain>
-        <Heading_h1>New and trending</Heading_h1>
-        <PageSubtitle>Based on player counts and release date</PageSubtitle>
+        <Heading_h1>Новые и популярные игры</Heading_h1>
+        <PageSubtitle>Рейтинг на основе выбора игроков и даты релиза</PageSubtitle>
         <Box>
           <CustomSelect
             width={"220px"}
-            title={"Order by:"}
+            title={"Сортировать:"}
             options={[
-              { title: "Release date from", value: "released" },
-              { title: "Release date to", value: "-released" },
-              { title: "Average rating from", value: "rating" },
-              { title: "Average rating to", value: "-rating" },
+              { title: "По дате - старые", value: "released" },
+              { title: "По дате - новые", value: "-released" },
+              { title: "Рейтинг - низкий", value: "rating" },
+              { title: "Рейтинг - высокий", value: "-rating" },
             ]}
             onChange={handleFilters}
           />
