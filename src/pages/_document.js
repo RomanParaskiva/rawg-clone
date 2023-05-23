@@ -26,6 +26,7 @@ export default function Document() {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#000000" />
         <meta name="referrer" content={'strict-origin'} />
+        <meta name="robots" content="all" />
       </Head>
       <body>
         <Main />
