@@ -157,6 +157,7 @@ export const getServerSideProps = async ({ query }) => {
           parent_platforms,
         },
       });
+      console.log(data);
       response = { ...data };
     }
 
